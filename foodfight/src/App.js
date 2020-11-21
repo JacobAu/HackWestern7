@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios'; 
-import Restaurant from "./components/Restaurant";
+import Main from "./components/Main";
 import styles from "./App.module.scss";
 import useTextInput from  "./hooks/useTextInput";
 import Button from "./components/Button"
@@ -40,6 +40,7 @@ function App() {
           )
           : null}
       </div>
+      <Main />
     </div>
   );
 }
