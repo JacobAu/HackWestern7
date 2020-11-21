@@ -1,12 +1,13 @@
 import axios from 'axios'
+import {useEffect, useState} from 'react';
 
 // hook used to GET business data, and "parse it" 
 export default function useBusiness(){
-
-  let finalData = {
-    businessName: "placehold",
-    price: "placehold",
+  
+  const [finalData, setFinalData] = useState()
+  useEffect(()=>{
     
-  }
+  });
+
   return(finalData);
 }
