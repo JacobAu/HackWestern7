@@ -12,8 +12,13 @@ function App() {
   const [selectedResturants, setSelectedResturants] = useState([]);
   const {currentPos} = useCurrentLocation();
   useEffect(()=>{
-    console.log(currentPos);
-  })
+    axios
+    .get("http://localhost:5000/api")
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((error)=>{console.log("broken")})
+  },[])
   const searchQuery = useTextInput("");
   return (
     <div className={styles.root}> 
