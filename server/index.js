@@ -14,21 +14,24 @@ app.listen(PORT, () =>{
   console.log(`Listening to ${PORT}`);
 })
 
-app.get('/api', (req, res) => {
+app.get('/api/nearbyBusinesses/:latitude/:longitude', (req, res) => {
+  let { latitude, longitude } = req.params;
+  if(latitude === 0 || longitude === 0){
+    res.send({message:"loading"})
+  }  
 
+  const searchRequest = {
+    latitude: latitude,
+    longitude: longitude,
+    limit: 20,
+  };  
   client.search(searchRequest).then(response => {
-    const firstResult = response.jsonBody.businesses[0];
-    const prettyJson = JSON.stringify(firstResult, null, 4);
-    res.send({data : firstResult});
+    const result = response.jsonBody.businesses
+    res.send({result});
   }).catch(e => {
     console.log(e);
     res.send({message:"error"});
   });
   
 })
-const searchRequest = {
-  term:'Starbucks',
-  location: 'milton, on'
-};
-
 
