@@ -2,16 +2,44 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios'; 
 import Restaurant from "./components/Restaurant";
 import styles from "./App.module.scss";
+import useTextInput from  "./hooks/useTextInput";
+import Button from "./components/Button"
+import useCurrentLocation from "./hooks/useCurrentLocation";
 
 function App() {
 
-  const [data, setData] = useState("broken");
+  const [resturantList, setResturantList] = useState([]);
+  const [selectedResturants, setSelectedResturants] = useState([]);
+  const {currentPos} = useCurrentLocation();
   useEffect(()=>{
-    console.log("hello?");
+    console.log(currentPos);
   })
+  const searchQuery = useTextInput("");
   return (
     <div className={styles.root}> 
-      <Restaurant /> 
+      <div>
+        <Button 
+          name={"Chef Papas"}
+          closingTime={"9pm"}
+          distance={"1km"}
+          clicked={true}
+        />
+        <Button 
+          name={"Gol's"}
+          closingTime={"9pm"}
+          distance={"1km"}
+          clicked={true}
+        />
+        <input type="text" value={searchQuery.value} onChange={searchQuery.onChange}/>
+        {currentPos ? 
+          (
+            <div>
+              <p> latitude {currentPos.latitude}</p>
+              <p>longitude {currentPos.longitude}</p>
+            </div>
+          )
+          : null}
+      </div>
     </div>
   );
 }
