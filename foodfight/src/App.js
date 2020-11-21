@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios'; 
-import Restaurant from "./components/Restaurant";
+import Main from "./components/Main";
 import styles from "./App.module.scss";
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
   })
   return (
     <div className={styles.root}> 
-      <Restaurant /> 
+      <Main />
     </div>
   );
 }
