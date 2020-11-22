@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./main.module.scss";
 import axios from "axios";
 import Button from "../Button";
+import car from "../../images/carIcon.png";
 
 export default function Main({ currentPos }) {
   const [showLetsGoBtn, setShowLetsGoBtn] = useState(true);
@@ -63,19 +64,24 @@ export default function Main({ currentPos }) {
   }, [currentPos]);
   return (
     <div className={styles.root}>
-    {
-      !scaleDown ? (<div className={styles.titleContainer}>
-        <p className={styles.title}>f<span style={{color:'black'}}>oo</span>d fight!</p>
-        <p className={styles.subtext}>Race to decide where to eat.</p>
-    </div>) :
-      <div className={styles.titleContainer} style={{
-        transform:'translateY(-150px)',
-        transitionDuration: '0.5s'
-        }}>
-          <p className={styles.title}>f<span style={{color:'black'}}>oo</span>d fight!</p>
+      
+      {
+        !scaleDown ? (<div className={styles.titleContainer}>
+          <img src={car} className={styles.titleIcon}></img>
+          <p className={styles.title}>r<span style={{color:'black'}}>ac</span>e for a taste!</p>
+          <div className={styles.infinite}></div>
           <p className={styles.subtext}>Race to decide where to eat.</p>
-      </div>
-    }
+      </div>) :
+        <div className={styles.titleContainer} style={{
+          transform:'translateY(-50px)',
+          transitionDuration: '0.5s'
+          }}>
+            <p className={styles.title}>r<span style={{color:'black'}}>ac</span>e for a taste!</p>
+            <div className={styles.infinite}></div>
+            <p className={styles.subtext}>Race to decide where to eat.</p>
+        </div>
+      }
+
 
 
       {showLetsGoBtn ? (
@@ -86,12 +92,12 @@ export default function Main({ currentPos }) {
           }}
           className={styles.btn}
         >
-          let's go
+          let's go!
         </button>
       ) : null}
 
       {data && !showLetsGoBtn && !restaurantSubmitted ? (
-        <div style={{transform:'translateY(-100px)'}}>
+        <div style={{transform:'translateY(-50px)'}}>
           <div className={styles.restaurantList}  >
             {data.map((restaurant) => {
               return (
