@@ -18,14 +18,6 @@ function App() {
 
   return (
     <div className={styles.root}>
-      <div>
-        {currentPos ? (
-          <div>
-            <p> latitude {currentPos.latitude}</p>
-            <p>longitude {currentPos.longitude}</p>
-          </div>
-        ) : null}
-      </div>
       {
         currentPos ? (
           <Main 
