@@ -5,7 +5,6 @@ import Button from "../Button"
 
 export default function Main({currentPos}){
     const [showLetsGoBtn, setShowLetsGoBtn] = useState(true);    
-    const [showSearch, setSearch] = useState(false);
     
     const [data, setData] = useState([]);
 
@@ -21,6 +20,23 @@ export default function Main({currentPos}){
     },[currentPos]) 
     return(
         <div className={styles.root}>
+            <div className={styles.titleContainer}>
+                <p className={styles.title}>f<span style={{color:'black'}}>oo</span>d fight!</p>
+                <p className={styles.subtext}>Race to decide where to eat.</p>
+            </div>
+            
+            {
+            showLetsGoBtn ? (
+                <button 
+                    onClick={()=> {
+							setShowLetsGoBtn(false) 
+						  }} 
+                    className={styles.btn}>
+                    let's go
+                    </button>
+					 ) : null  
+            }
+
           {data ? 
               (
               <div className={styles.restaurantList}>
@@ -31,7 +47,6 @@ export default function Main({currentPos}){
                       <Button
                         name={restaurant.name.substring(0, 20)}
                         closingTime={"9pm"}
-                        
                       ></Button>
                       </div>
                     )
@@ -40,32 +55,6 @@ export default function Main({currentPos}){
               </div>
               )
             : null} 
-            <div className={styles.titleContainer}>
-                <p className={styles.title}>food fight!</p>
-                <p className={styles.subtext}>decide where to eat</p>
-            </div>
-            
-            {
-            showLetsGoBtn ? (
-                <button 
-                    onClick={()=> {
-							setShowLetsGoBtn(false) 
-							setSearch(true)  
-						  }} 
-                    className={styles.btn}>
-                    let's go
-                    </button>
-					 ) : null  
-            }
-            {		 
-            showSearch ? (
-					<input
-					className={styles.search} 
-					placeholder='enter a restaurant or food place'
-					>
-					</input>
-				) : null
-			}
         </div>
     );
 }
