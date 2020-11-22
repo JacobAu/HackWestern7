@@ -20,7 +20,6 @@ export default function Main({currentPos}){
     },[currentPos]) 
     return(
         <div className={styles.root}>
-
             <div className={styles.titleContainer}>
                 <p className={styles.title}>f<span style={{color:'black'}}>oo</span>d fight!</p>
                 <p className={styles.subtext}>Race to decide where to eat.</p>
@@ -39,17 +38,22 @@ export default function Main({currentPos}){
             }
 
           {data ? 
-              data.map((restaurant)=> {
-                return(
-                  <div style={{marginBottom: "10px"}}>
-                  <Button
-                    name={restaurant.name.substring(0, 20)}
-                    closingTime={"9pm"}
-                    
-                  ></Button>
-                  </div>
-                )
-            })
+              (
+              <div className={styles.restaurantList}>
+                {
+                  data.map((restaurant)=> {
+                    return(
+                      <div style={{marginBottom: "10px"}}>
+                      <Button
+                        name={restaurant.name.substring(0, 20)}
+                        closingTime={"9pm"}
+                      ></Button>
+                      </div>
+                    )
+                })
+                }
+              </div>
+              )
             : null} 
         </div>
     );
