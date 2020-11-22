@@ -16,7 +16,7 @@ export default function Main({ currentPos }) {
     distance /= 10;
     distance = Math.round(distance);
     distance /= 100;
-    let newPrice = price.length;
+    let newPrice = price.length ? price.length: 0;
 
     if (selectedResturants.map((x) => x.id).includes(id)) {
       let updatedResturants = [];
