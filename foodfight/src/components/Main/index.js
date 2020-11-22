@@ -5,6 +5,7 @@ import Button from "../Button";
 
 export default function Main({ currentPos }) {
   const [showLetsGoBtn, setShowLetsGoBtn] = useState(true);
+  const [scaleDown, setScaleDown] = useState(false);
   const [restaurantSubmitted, setResturantSubmitted] = useState(false);
   const [selectedResturants, setSelectedResturants] = useState([]);
 
@@ -62,17 +63,26 @@ export default function Main({ currentPos }) {
   }, [currentPos]);
   return (
     <div className={styles.root}>
-      <div className={styles.titleContainer}>
-        <p className={styles.title}>
-          f<span style={{ color: "black" }}>oo</span>d fight!
-        </p>
+    {
+      !scaleDown ? (<div className={styles.titleContainer}>
+        <p className={styles.title}>f<span style={{color:'black'}}>oo</span>d fight!</p>
         <p className={styles.subtext}>Race to decide where to eat.</p>
+    </div>) :
+      <div className={styles.titleContainer} style={{
+        transform:'translateY(-150px)',
+        transitionDuration: '0.5s'
+        }}>
+          <p className={styles.title}>f<span style={{color:'black'}}>oo</span>d fight!</p>
+          <p className={styles.subtext}>Race to decide where to eat.</p>
       </div>
+    }
+
 
       {showLetsGoBtn ? (
         <button
           onClick={() => {
             setShowLetsGoBtn(false);
+            setScaleDown(true);
           }}
           className={styles.btn}
         >
@@ -81,8 +91,8 @@ export default function Main({ currentPos }) {
       ) : null}
 
       {data && !showLetsGoBtn && !restaurantSubmitted ? (
-        <div>
-          <div className={styles.restaurantList}>
+        <div style={{transform:'translateY(-100px)'}}>
+          <div className={styles.restaurantList}  >
             {data.map((restaurant) => {
               return (
                 <div style={{ marginBottom: "10px" }}>
@@ -110,7 +120,7 @@ export default function Main({ currentPos }) {
             })}
           </div>
           <div className={styles.submitButton} onClick={handleRestaurantSubmit}>
-            Fight!
+            Begin Race!
           </div>
         </div>
       ) : null}
