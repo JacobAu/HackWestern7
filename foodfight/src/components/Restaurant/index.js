@@ -1,11 +1,14 @@
 import React from 'react';
 import styles from './styles.module.scss';
 
-export default function Restaurant({businessName, price, numReviews, }){
+export default function Restaurant({name, ranking, iconLink }){
   
   return (
     <div className={styles.root}>
-      THis is a Restaurant
+      <img src={iconLink} alt={"restaurantIcon"}/>
+      <p clasName={styles.text}>
+        {name}
+      </p>
     </div> 
   );
 }
