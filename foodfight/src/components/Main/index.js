@@ -4,21 +4,20 @@ import axios from "axios";
 import Button from "../Button";
 import RaceScreen from "../RaceScreen";
 import car from "../../images/carIcon.png";
-
+  
 
 export default function Main({ currentPos }) {
-  const [showLetsGoBtn, setShowLetsGoBtn] = useState(true);
+  const [showView, setShowView] = useState("start");
   const [scaleDown, setScaleDown] = useState(false);
   const [restaurantSubmitted, setResturantSubmitted] = useState(false);
   const [selectedRestaurants, setselectedRestaurants] = useState([]);
-
   const [data, setData] = useState([]);
 
   function handleSelect(id, name, distance, price, rating, reviewCount, isClosed) {
     distance /= 10;
     distance = Math.round(distance);
     distance /= 100;
-    let newPrice = price.length ? price.length: 0;
+    let newPrice = price ? price.length: 0;
 
     if (selectedRestaurants.map((x) => x.id).includes(id)) {
       let updatedResturants = [];
@@ -54,8 +53,8 @@ export default function Main({ currentPos }) {
 
    // if you have any more flags, add here pls
    function handleReset(){
-    setShowLetsGoBtn(true);
-    // setScaleDown(false);
+    setShowView("start");
+    setScaleDown(false);
     setResturantSubmitted(false);
     setselectedRestaurants([]);
   }
@@ -86,9 +85,10 @@ export default function Main({ currentPos }) {
           <p className={styles.subtext}>Race to decide where to eat.</p>
       </div>) :
         <div className={styles.titleContainer} style={{
-          transform:'translateY(-50px)',
-          transitionDuration: '0.5s'
+          transitionDuration: '0.5s',
+          transform:'scale(0.8)'
           }}>
+            <img src={car} className={styles.titleIcon}></img>
             <p className={styles.title}>r<span style={{color:'black'}}>ac</span>e for a taste!</p>
             <div className={styles.infinite}></div>
             <p className={styles.subtext}>Race to decide where to eat.</p>
@@ -97,21 +97,59 @@ export default function Main({ currentPos }) {
 
 
 
-      {showLetsGoBtn ? (
-        <button
-          onClick={() => {
-            setShowLetsGoBtn(false);
-            setScaleDown(true);
-          }}
-          className={styles.btn}
-        >
-          let's go!
-        </button>
+      {showView === "start" ? (
+        <div style={{margin:"0px 0px", height: "40vh", display:"block"}}>
+          <button
+            onClick={() => {
+              setShowView("game");
+              setScaleDown(true);
+            }}
+            className={styles.btn}
+          >
+            let's go!
+          </button>
+          <button
+            className={styles.btn}
+            onClick={()=>{
+              setShowView("instructions")
+              setScaleDown(true);
+            }}
+          > 
+            how it works
+          </button> 
+        </div>
       ) : null}
-
-      {data && !showLetsGoBtn && !restaurantSubmitted ? (
-        <div style={{transform:'translateY(-50px)'}}>
+      {
+        showView === "instructions" ? (
+          <div>
+            <p className={styles.instructionTitle}>How it works:</p>
+            <div className={styles.instructionPanel}>
+            <div style={{marginBottom:"0.5re"}}>
+              Choosing what to eat can be so <em><strong>boring</strong></em> and <em><strong>mundane</strong></em>. 
+              This ordeal has led to the breaking of friendships,
+              the starvation of many, and the loss of potential business
+              for a plethora of local eateries.  
+            </div>
+            <div>
+              With <span style={{color: "#1F3879", fontWeight:"bold"}}> race for a taste </span>, get an instant restaurant choice 
+              based on credible Yelp criteria and real-time data!
+            </div>
+            </div>
+            <button className={styles.goBack} onClick={()=> {
+              setShowView("start")
+              setScaleDown(false);
+              }}>
+              Go Back
+            </button>
+          </div>
+        ) :null 
+      }
+      {data && showView === 'game' && !restaurantSubmitted ? (
+        <div style={{transform:'translateY(-30px)'}}>
           <div className={styles.restaurantList}  >
+            <p style={{fontSize:"20px", margin: "5px 0"}}>
+              Restaurants Near You 
+            </p>
             {data.map((restaurant) => {
               return (
                 <div style={{ marginBottom: "10px" }}>
@@ -148,6 +186,7 @@ export default function Main({ currentPos }) {
           <div>
             <RaceScreen 
               selectedRestaurants={selectedRestaurants}
+              reset={handleReset}
             />
           </div>
         ) :null

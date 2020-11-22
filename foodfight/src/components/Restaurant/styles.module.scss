@@ -6,4 +6,64 @@ $PRIMARY : "red";
 .root{
   font-size: 14px;
   font-family: "Poppins";
+  display:flex;
+  margin: 18px 0px;
+  border-top: 2px black solid;
+}
+
+.text{
+  line-height: 100%;
+  font-size: 15px;
+}
+
+@keyframes animate{
+  0%{
+    transform: translateX(0);
+  }
+  50%{
+    transform: translateX(40vw);
+  }
+  100%{
+    transform: translateX(80vw);
+  }
+}
+
+.car1{
+  position:absolute;
+  left: 150px;
+  width:4rem;
+  animation: animate 4s linear;  
+  animation-fill-mode: forwards;
+}
+
+.car2{
+  position:absolute;
+  left: 150px;
+  width:4rem;
+  animation: animate 5s linear;  
+  animation-fill-mode: forwards;
+}
+
+.car3{
+  position:absolute;
+  left: 150px;
+  width:4rem;
+  animation: animate 6s linear;  
+  animation-fill-mode: forwards;
+}
+
+.car4{
+  position:absolute;
+  left: 150px;
+  width:4rem;
+  animation: animate 7s linear;  
+  animation-fill-mode: forwards;
+}
+
+.car5{
+  position:absolute;
+  left: 150px;
+  width:4rem;
+  animation: animate 8s linear;  
+  animation-fill-mode: forwards;
 }

@@ -6,11 +6,11 @@ $font-stack: Poppins, sans-serif;
     background-color: #BFD1FF;
     font-family: $font-stack;
     font-size: 6rem;
-    padding-top: 100px;
     text-align: center;
 }
 
 .titleContainer{
+  transition-duration: 0.4s;
     line-height:100%;
     font-weight: bold;
     color: #1F3879;
@@ -50,7 +50,7 @@ $font-stack: Poppins, sans-serif;
   left: 0;
   width: 100%;
   height: 5px;
-  background: linear-gradient(90deg, #fff 0%, #fff 70%,
+  background: linear-gradient(90deg, rgb(252, 255, 83) 0%, rgb(252, 255, 83) 70%,
   #525252 70%, #525252 100%);
   background-size: 100px;
   animation: animate 0.4s linear infinite;
@@ -75,7 +75,6 @@ $font-stack: Poppins, sans-serif;
     color: black;
     border-radius: 1rem;
     font-size: 36px;
-    margin: 5%;
     width: 90%;
     height: 55px;
 }
@@ -92,24 +91,55 @@ $font-stack: Poppins, sans-serif;
     display: none;
 }
 
-input{
-    height: 55px;
-    width: 90%;
-    margin: 5% auto;
-    font-family: $font-stack;
-    text-align: center;
-    font-size: 1rem;
-    border: none;
-    border-radius: 1rem;
+.instructionTitle{
+  font-family: $font-stack; 
+  font-size: 30px;
+  color: #1F3879;
+  font-weight: bold;
+  margin-top: -40px;
+  margin-bottom: 10px;
+
+}
+
+.instructionPanel{
+  font-size:20px;
+  background-color: rgb(102, 173, 231);
+  width: 55vw;
+  margin: 0 auto;
+  box-shadow: 0px 5px rgb(89, 141, 189);
+  border-radius: 1rem;
+  padding: 1rem 1rem;
+}
+
+.goBack{
+  box-shadow: 0px 5px rgb(167, 167, 167);
+  border:none;
+  transition-duration: 0.4s;
+  font-family: $font-stack;
+  background-color: white;
+  font-weight:bold;
+  color: black;
+  border-radius: 1rem;
+  font-size: 36px;
+  width: 90%;
+  height: 55px;
+}
+
+.goBack:hover{
+  transform: translateY(-5px);
+  box-shadow: 0px 10px rgb(83, 170, 144);
+  color:white;
+  text-shadow: 0px 3px rgb(83, 170, 144);
+  background-color: rgb(146, 211, 191);
 }
 
 .restaurantList{
   border: 4px solid #506697;
   background-color: #7998e0;
   border-radius: 1rem;
-  padding: 40px 50px;
+  padding: 10px 50px;
   overflow-y: scroll;
-  height: 30vh;
+  height: 37vh;
   width: 430px;
   margin: 20px auto;
 }
@@ -150,5 +180,5 @@ input{
   position: relative;
   top: 30px;
   right: 300px;
-  width: 200px;
+  width: 180px;
 }

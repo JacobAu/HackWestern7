@@ -1,11 +1,19 @@
 import react, {useEffect, useState} from 'react';
 import styles from './styles.module.scss';
 import FinishLine from "../FinishLine"
+import Restaurant from "../Restaurant";
+import car1 from "../../images/Group 73.png"
+import car2 from "../../images/Group 74.png"
+import car3 from "../../images/Group 75.png"
+import car4 from "../../images/Group 76.png"
+import car5 from "../../images/Group 77.png"
 
-
-export default function RaceScreen({selectedRestaurants}){
+export default function RaceScreen({selectedRestaurants, reset}){
   const [winner, setWinner] = useState("");
-  const [rankings, setRankings] = useState([])
+  const [rankings, setRankings] = useState([]);
+    const carPNGLinks = [car1, car2, car3, car4, car5] 
+    const [showWinner, setShowWinner] = useState(false);
+    const animationDurations = [5000, 6000, 7000, 8000];
 
     let points = {};
     for(let i=0; i < selectedRestaurants.length; i++){
@@ -218,12 +226,40 @@ export default function RaceScreen({selectedRestaurants}){
         setRankings(Object.keys(rankings));
         setWinner(determineWinner());
     },[])
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowWinner(true);
+        }, animationDurations[selectedRestaurants.length -2]);
+        return () => clearTimeout(timer);
+      }, []);
   return(
     <div className={styles.root}>
-      <p>this is the RaceScreen page</p>
       <FinishLine />
       {
- 
+          rankings.map((x, index) =>{
+              return(
+                    <Restaurant 
+                        name={x.length > 16 ? x.substring(0,16).concat("..."): x}
+                        ranking={index}
+                        iconLink={carPNGLinks[index]}
+                        styles={{width: '30px'}}
+                        winnerAnnounced={showWinner}
+                    /> 
+              )
+          })
+      }
+      {
+          showWinner ? (
+            <div>
+                <div className={styles.win}>
+                    {winner} has won!
+                </div>
+                <div onClick={reset} className={styles.reset}>
+                    Compare Again
+                </div>
+            </div>
+          ) :null
       }
     </div>
   );
