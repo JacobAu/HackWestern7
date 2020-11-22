@@ -87,3 +87,16 @@ input{
   border-radius: 20px;       /* roundness of the scroll thumb */
   height: 10px;
 }
+
+.submitButton{
+  font-size: 26px;
+  border-radius: 20px;
+  background-color: #ce78ff;
+  margin: 0 auto;
+  width: 130px;
+}
+
+.submitButton:hover{
+  cursor: pointer;
+
+}
