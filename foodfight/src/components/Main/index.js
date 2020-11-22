@@ -97,7 +97,7 @@ export default function Main({ currentPos }) {
               return (
                 <div style={{ marginBottom: "10px" }}>
                   <Button
-                    name={restaurant.name.substring(0, 20)}
+                    name={restaurant.name}
                     onClick={() =>
                       handleSelect(
                         restaurant.id,
