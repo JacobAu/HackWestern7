@@ -5,6 +5,7 @@ import FinishLine from "../FinishLine"
 
 export default function RaceScreen({selectedRestaurants}){
   const [winner, setWinner] = useState("");
+  const [rankings, setRankings] = useState([])
 
     let points = {};
     for(let i=0; i < selectedRestaurants.length; i++){
@@ -213,12 +214,17 @@ export default function RaceScreen({selectedRestaurants}){
         isOpen(selectedRestaurants);  
         let rankings = sort(points);
         console.log(rankings);
-        winner();
+        console.log(Object.keys(rankings));
+        setRankings(Object.keys(rankings));
+        setWinner(determineWinner());
     },[])
   return(
     <div className={styles.root}>
       <p>this is the RaceScreen page</p>
       <FinishLine />
+      {
+ 
+      }
     </div>
   );
 }
