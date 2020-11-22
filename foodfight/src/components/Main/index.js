@@ -3,9 +3,12 @@ import styles from "./main.module.scss";
 import axios from "axios";
 import Button from "../Button";
 import RaceScreen from "../RaceScreen";
+import car from "../../images/carIcon.png";
+
 
 export default function Main({ currentPos }) {
   const [showLetsGoBtn, setShowLetsGoBtn] = useState(true);
+  const [scaleDown, setScaleDown] = useState(false);
   const [restaurantSubmitted, setResturantSubmitted] = useState(false);
   const [selectedRestaurants, setselectedRestaurants] = useState([]);
 
@@ -15,7 +18,7 @@ export default function Main({ currentPos }) {
     distance /= 10;
     distance = Math.round(distance);
     distance /= 100;
-    let newPrice = price.length;
+    let newPrice = price.length ? price.length: 0;
 
     if (selectedRestaurants.map((x) => x.id).includes(id)) {
       let updatedResturants = [];
@@ -74,32 +77,46 @@ export default function Main({ currentPos }) {
   }, [currentPos]);
   return (
     <div className={styles.root}>
-      <div className={styles.titleContainer}>
-        <p className={styles.title}>
-          f<span style={{ color: "black" }}>oo</span>d fight!
-        </p>
-        <p className={styles.subtext}>Race to decide where to eat.</p>
-      </div>
+      
+      {
+        !scaleDown ? (<div className={styles.titleContainer}>
+          <img src={car} className={styles.titleIcon}></img>
+          <p className={styles.title}>r<span style={{color:'black'}}>ac</span>e for a taste!</p>
+          <div className={styles.infinite}></div>
+          <p className={styles.subtext}>Race to decide where to eat.</p>
+      </div>) :
+        <div className={styles.titleContainer} style={{
+          transform:'translateY(-50px)',
+          transitionDuration: '0.5s'
+          }}>
+            <p className={styles.title}>r<span style={{color:'black'}}>ac</span>e for a taste!</p>
+            <div className={styles.infinite}></div>
+            <p className={styles.subtext}>Race to decide where to eat.</p>
+        </div>
+      }
+
+
 
       {showLetsGoBtn ? (
         <button
           onClick={() => {
             setShowLetsGoBtn(false);
+            setScaleDown(true);
           }}
           className={styles.btn}
         >
-          let's go
+          let's go!
         </button>
       ) : null}
 
       {data && !showLetsGoBtn && !restaurantSubmitted ? (
-        <div>
-          <div className={styles.restaurantList}>
+        <div style={{transform:'translateY(-50px)'}}>
+          <div className={styles.restaurantList}  >
             {data.map((restaurant) => {
               return (
                 <div style={{ marginBottom: "10px" }}>
                   <Button
-                    name={restaurant.name.substring(0, 20)}
+                    name={restaurant.name}
                     onClick={() =>
                       handleSelect(
                         restaurant.id,
@@ -122,7 +139,7 @@ export default function Main({ currentPos }) {
             })}
           </div>
           <div className={styles.submitButton} onClick={handleRestaurantSubmit}>
-            Fight!
+            Begin Race!
           </div>
         </div>
       ) : null}
