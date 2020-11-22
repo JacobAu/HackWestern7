@@ -1,9 +1,11 @@
-import react, {useEffect} from 'react';
+import react, {useEffect, useState} from 'react';
 import styles from './styles.module.scss';
 import FinishLine from "../FinishLine"
 
 
 export default function RaceScreen({selectedRestaurants}){
+  const [winner, setWinner] = useState("");
+
     let points = {};
     for(let i=0; i < selectedRestaurants.length; i++){
         let key = selectedRestaurants[i].name;
@@ -170,7 +172,7 @@ export default function RaceScreen({selectedRestaurants}){
         
     }
 
-    function winner(){
+    function determineWinner(){
         let max = 0;
         let maxKey; 
         for(var names in points){
@@ -178,8 +180,7 @@ export default function RaceScreen({selectedRestaurants}){
             max = (max < points[names]) ? points[names] : max;
             
         }
-        
-        console.log(maxKey);
+        return maxKey
     }
     
 
@@ -190,7 +191,7 @@ export default function RaceScreen({selectedRestaurants}){
         compareReviewCount(selectedRestaurants);         
         isOpen(selectedRestaurants);  
         console.log(points);
-        winner();
+        setWinner(determineWinner());
     },[])
   return(
     <div className={styles.root}>
