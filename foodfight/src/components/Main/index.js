@@ -22,17 +22,23 @@ export default function Main({currentPos}){
     return(
         <div className={styles.root}>
           {data ? 
-              data.map((restaurant)=> {
-                return(
-                  <div style={{marginBottom: "10px"}}>
-                  <Button
-                    name={restaurant.name.substring(0, 20)}
-                    closingTime={"9pm"}
-                    
-                  ></Button>
-                  </div>
-                )
-            })
+              (
+              <div className={styles.restaurantList}>
+                {
+                  data.map((restaurant)=> {
+                    return(
+                      <div style={{marginBottom: "10px"}}>
+                      <Button
+                        name={restaurant.name.substring(0, 20)}
+                        closingTime={"9pm"}
+                        
+                      ></Button>
+                      </div>
+                    )
+                })
+                }
+              </div>
+              )
             : null} 
             <div className={styles.titleContainer}>
                 <p className={styles.title}>food fight!</p>
