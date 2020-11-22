@@ -182,6 +182,27 @@ export default function RaceScreen({selectedRestaurants}){
         console.log(maxKey);
     }
     
+    function sort(points){
+        let temp = Object.keys(points).map(function(key) {
+            return [key, points[key]];
+            });
+    
+            // Sort the array based on the second element
+            temp.sort(function(first, second) {
+            return second[1] -first[1];
+            });
+    
+            // Create a new array with only the first 5 items
+            let sorted = temp.slice(0,5)
+            
+            let d = {};
+            for(let i =0; i < sorted.length; i++){
+                let arr = sorted[i];
+                let key = arr[0];
+                d[key] = arr[1];
+            }
+            return d;
+    }
 
     useEffect(()=>{
         compareDistance(selectedRestaurants);
@@ -189,7 +210,8 @@ export default function RaceScreen({selectedRestaurants}){
         compareRatings(selectedRestaurants);    
         compareReviewCount(selectedRestaurants);         
         isOpen(selectedRestaurants);  
-        console.log(points);
+        let rankings = sort(points);
+        console.log(rankings);
         winner();
     },[])
   return(
